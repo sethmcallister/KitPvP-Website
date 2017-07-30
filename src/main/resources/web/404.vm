@@ -1,0 +1,10 @@
+#parse("/web/global/layout.vm")
+#@mainLayout()
+<form id="404Form" method="get">
+    <div class="container">
+        <h3>Not Found (Error 404)</h3>
+        <hr />
+        <p>If this page should exist, please report this in our teamspeak @ ts.OvidPvP.org</p>
+    </div>
+</form>
+#end

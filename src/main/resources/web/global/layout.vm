@@ -1,0 +1,80 @@
+#macro(mainLayout)
+<!doctype html>
+<html lang="en">
+<head>
+    <title>KitPvP | Soup PvP, and HG network.</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Home to the best KitPvP, Soup, and Hungergames experience found in Minecraft." />
+    <meta name="keywords" content="kitpvp, soup, hungergames, pvp, minecraft, playervsplayer, soupvp, best, grind, server, minecraft server, elite, donation, money, store, forums, custom, plugins, spigot, bukkit, scoreboard, google, bing, yahoo" />
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://opensource.keycdn.com/fontawesome/4.7.0/font-awesome.min.css" integrity="sha384-dNpIIXE8U05kAbPhy3G1cz+yZmTzA6CY8Vg/u2L9xRnHjJiAK76m2BIEaSEV+/aU" crossorigin="anonymous">
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a class="navbar-brand" href="/">KitPvP</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="/forums"><i class="fa fa-comment-o"></i> Forums</a></li>
+      </ul>
+      <ul class="nav navbar-nav">
+        <li><a href="/store"><i class="fa fa-shopping-cart"></i> Store</a></li>
+      </ul>
+      <ul class="nav navbar-nav">
+        <li><a href="/leaderboards/kitpvp/1"><i class="fa fa-user-o"></i> Leaderboards</a></li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+            <form method="post" class="navbar-form navbar-right">
+               <div class="input-group">
+                   <input name="searchUser" placeholder="Search" class="form-control" />
+                   <div class="input-group-btn">
+                       <button class="btn btn-info">
+                       <span class="glyphicon glyphicon-search"></span>
+                       </button>
+                   </div>
+               </div>
+            </form>
+        </li>
+        <li>
+            #if($loggedIn)
+                <a href="/user/$loggedInAs.getName()"><img src="https://visage.surgeplay.com/face/22/$loggedInAs.getUniqueId()" alt=$loggedInAs.getName()></img>$loggedInAs.getName()</a>
+            #else
+                <a href="/login">Login</a>
+            #end
+        </li>
+        #if($loggedIn)
+            <li>
+                <a href="/logout">Logout</a>
+            </li>
+        #end
+      </ul>
+    </div>
+  </div>
+</nav>
+<main>
+    <div>
+        $bodyContent
+    </div>
+</main>
+</div>
+</body>
+</html>
+#end

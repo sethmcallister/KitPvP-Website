@@ -1,0 +1,8 @@
+#parse("/web/global/layout.vm")
+#@mainLayout()
+<form id="indexForm" method="post">
+    <div class="container">
+
+    </div>
+</form>
+#end

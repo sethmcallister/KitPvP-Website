@@ -1,0 +1,47 @@
+#parse("/web/global/layout.vm")
+#@mainLayout()
+<form id="leaderForm" method="post">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Top Kills</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Position</th>
+                            <th>Username</th>
+                            <th>Kills</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        #foreach($entry in $entries_1)
+                            <th scope="row">#$entry.getPlace()</th>
+                            <td><img class="table_img" src="https://crafatar.com/avatars/" + $entry.getProfile().getUniqueId() alt=$entry.getProfile().getName()><a href="/user/" + $entry.getProfile().getName()></a></img></td>
+                            <td>$entry.getScore()</td>
+                        #end
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <h3>Top Deaths</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Position</th>
+                            <th>Username</th>
+                            <th>Deaths</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        #foreach($entry in $entries_2)
+                            <th scope="row">#$entry.getPlace()</th>
+                            <td><img class="table_img" src="https://crafatar.com/avatars/" + $entry.getProfile().getUniqueId() alt=$entry.getProfile().getName()><a href="/user/" + $entry.getProfile().getName()></a></img></td>
+                            <td>$entry.getScore()</td>
+                        #end
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</form>
+#end

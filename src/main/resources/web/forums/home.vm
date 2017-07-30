@@ -1,0 +1,62 @@
+#parse("/web/global/layout.vm")
+#@mainLayout()
+    <form id="forumsHomeForm" method="post">
+        <div class="container">
+            <div class="page-header page-heading">
+                #if($loggedIn)
+                    #if($staff)
+                        <button type="button" data-toggle="modal" data-target="#create-category" class="btn btn-primary col-md-offset-10">Create Category</button>
+                    #end
+                #end
+                <div class="modal fade" id="create-category" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                    <center>
+                        <div class="container">
+                            <div class="row">
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <div class="col-md-8 col-md-offset-2">
+                                    <h1>Create Category</h1>
+
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="c-title" placeholder="Category Title" ></input>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <textarea rows="5" class="form-control" name="c-desc" placeholder="Category Description" ></textarea>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary">
+                                                Create
+                                            </button>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </center>
+                </div>
+                <table class="table forum table-striped">
+                    <thead>
+                        <tr>
+                            <th><h3>Categories</h3></th>
+                            <th class="cell-stat text-center hidden-xs hidden-sm">Threads</th>
+                            <th class="cell-stat text-center hidden-xs hidden-sm">Views</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        #foreach($c in $categories)
+                            <tr>
+                                <td><h4><a href="/forums/category/$c.getCategoryId()">$c.getCategoryName()</a><br><small>$c.getDescription()</small></h4></td>
+                                <td class="text-center hidden-xs hidden-sm"><p>$c.getThreads().size()</p></td>
+                                <td class="text-center hidden-xs hidden-sm"><p>$c.getTotalViews()</p></td>
+                            </tr>
+                        #end
+                     </tbody>
+                </table>
+            </table>
+        </div>
+    </form>
+#end

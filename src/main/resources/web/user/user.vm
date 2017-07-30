@@ -1,0 +1,25 @@
+#parse("/web/global/layout.vm")
+#@mainLayout()
+<form id="userForm" method="get">
+#if($foundUser)
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-2">
+                <img class="center-block text-center" src="https://visage.surgeplay.com/full/200/$user.getUniqueId()" style="border-radius: 2px" alt=$user.getName()></img>
+            </div>
+            <div class="col-sm-10">
+                <h3>$user.getName()</h3>
+                <p>First joined $user.getJoinedDate().toGMTString()</p>
+                <hr \>
+            </div>
+        </div>
+    </div>
+#else
+    <div class="container">
+        <h3>User not found</h>
+        <hr />
+        <p>No user with that name could be found.</p>
+    </div>
+#end
+</form>
+#end
