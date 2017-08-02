@@ -37,10 +37,11 @@ public class ForumsHomePost extends Page implements Route
         String cDesc = request.queryParams("c-desc");
         if ((ctitle != null) && (cDesc != null))
         {
-            Category forumCategory = new CoreCategory(WebsiteAPI.getForumManager().findAllCategories().size() + 1, null, ctitle);
+            Category forumCategory = new CoreCategory(WebsiteAPI.getForumManager().findAllCategories().size() + 1, Integer.MAX_VALUE, ctitle, cDesc);
             WebsiteAPI.getForumManager().findAllCategories().add(forumCategory);
+            WebsiteAPI.getRedisCategoryDAO().insert((CoreCategory) forumCategory);
         }
-        response.redirect("/forums/");
+        response.redirect("/forums");
         return render(request, map, Path.Template.FORUMS_HOME);
     }
 }

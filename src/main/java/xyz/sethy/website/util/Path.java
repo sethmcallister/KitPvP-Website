@@ -16,8 +16,10 @@ public class Path
         public static String FORUMS_HOME = "/forums";
         public static String FORUMS_CATEGORY = "/forums/category/:category";
         public static String FORUMS_THREAD = "/forums/thread/:thread";
-        public static String FORUMS_DELETE_THREAD = "/forums/delete/thread/:thread";
+        public static String FORUMS_DELETE_THREAD = "/forums/thread/:thread/delete";
+        public static String FORUMS_LOCK_THREAD = "/forums/thread/:thread/lock";
         public static String REGISTER = "/register/:uuid";
+        public static String SETTINGS = "/settings";
     }
 
     public static class Template
@@ -32,5 +34,6 @@ public class Path
         public static final String FORUMS_CATEGORY = "/web/forums/category.vm";
         public static final String FORUMS_THREAD = "/web/forums/thread.vm";
         public static final String REGISTER = "/web/register/register.vm";
+        public static final String SETTINGS = "/web/settings/settings.vm";
     }
 }

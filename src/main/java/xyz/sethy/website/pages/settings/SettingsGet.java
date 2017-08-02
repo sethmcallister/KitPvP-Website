@@ -1,4 +1,4 @@
-package xyz.sethy.website.pages.store;
+package xyz.sethy.website.pages.settings;
 
 import com.skygrind.api.API;
 import com.skygrind.api.framework.user.User;
@@ -12,7 +12,7 @@ import xyz.sethy.website.util.Path;
 import java.util.HashMap;
 import java.util.Map;
 
-public class StoreGet extends Page implements Route
+public class SettingsGet extends Page implements Route
 {
     @Override
     public Object handle(final Request request, final Response response) throws Exception
@@ -32,6 +32,15 @@ public class StoreGet extends Page implements Route
                 }
             }
         }
-        return render(request, map, Path.Template.STORE);
+
+        if(user == null)
+        {
+            response.redirect("/404");
+            return render(request, map, Path.Template.SETTINGS);
+        }
+
+        map.put("foundUser", true);
+        map.put("user", user);
+        return render(request, map, Path.Template.SETTINGS);
     }
 }

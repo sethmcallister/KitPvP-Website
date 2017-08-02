@@ -4,9 +4,9 @@
     <div class="container">
         <div>
             #if($foundCategory)
-                <h3>$currentCategory.getCategoryName()</h3>
+                <h3>$currentCategory.getName()</h3>
                 #if($loggedIn)
-                    #if($loggedInAs.getGroup().isStaff())
+                    #if($staff)
                         <button type="button" data-toggle="modal" data-target="#create-category" class="btn btn-primary col-md-offset-10">Create Category</button>
                     #end
                 #end
@@ -53,7 +53,7 @@
                     <tbody>
                         #foreach($c in $categories)
                             <tr>
-                                <td><h4><a href="/forums/category/$c.getCategoryId()">$c.getCategoryName()</a>
+                                <td><h4><a href="/forums/category/$c.getId()">$c.getName()</a>
                                     <br><small>$c.getDescription()</small></h4></td>
                                 <td class="text-center hidden-xs hidden-sm"><p>$c.getThreads().size()</p></td>
                                 <td class="text-center hidden-xs hidden-sm"><p>$c.getTotalViews()</p></td>
@@ -110,7 +110,7 @@
                         #foreach($t in $threads)
                             <tr>
                                 <td><h4><a href="/forums/thread/$t.getId()">$t.getTitle()</a>
-                                <td class="text-center hidden-xs hidden-sm"><p></img>$t.getAuthor().getLastName()</p></td>
+                                <td class="text-center hidden-xs hidden-sm"><p></img>$t.getAuthor().getName()</p></td>
                                 <td class="text-center hidden-xs hidden-sm"><p>$t.getViews()</p></td>
                                 <td class="text-center hidden-xs hidden-sm"><p>$t.getReplies().size()</p></td>
                             </tr>

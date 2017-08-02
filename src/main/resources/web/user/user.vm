@@ -6,11 +6,39 @@
         <div class="row">
             <div class="col-sm-2">
                 <img class="center-block text-center" src="https://visage.surgeplay.com/full/200/$user.getUniqueId()" style="border-radius: 2px" alt=$user.getName()></img>
+                <div class="center-block text-center label label-default rank-$user.getProfile("permissions").getString("group").toLowerCase()">
+                    $user.getProfile("permissions").getString("group").toLowerCase()
+                </div>
             </div>
             <div class="col-sm-10">
-                <h3>$user.getName()</h3>
-                <p>First joined $user.getJoinedDate().toGMTString()</p>
+                #if($theirUser)
+                    <h3>$user.getName() <a class="fa fa-cog" aria-hidden="true" href="/settings"></a></h3>
+                #else
+                    <h3>$user.getName()</h3>
+                #end
+                <p>Joined at $user.getJoinedDate().toGMTString()</p>
                 <hr \>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <table class="table">
+                        <caption>Stats</caption>
+                        <tbody>
+                            <tr>
+                                <td>Coins</td>
+                                <td>$user.getProfile("kitpvp").getDouble("coins").intValue()</td>
+                            </tr>
+                            <tr>
+                                <td>Kills</td>
+                                <td>$user.getProfile("kitpvp").getDouble("kills").intValue()</td>
+                            </tr>
+                            <tr>
+                                <td>Deaths</td>
+                                <td>$user.getProfile("kitpvp").getDouble("deaths").intValue()</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

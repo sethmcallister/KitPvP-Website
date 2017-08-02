@@ -1,26 +1,24 @@
-package xyz.sethy.website.pages.leaderboards;
+package xyz.sethy.website.pages.forums;
 
 import com.skygrind.api.API;
 import com.skygrind.api.framework.user.User;
 import com.skygrind.core.framework.user.CoreUserManager;
-import org.apache.commons.lang3.StringUtils;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 import xyz.sethy.website.pages.Page;
 import xyz.sethy.website.util.Path;
 import xyz.sethy.websiteapi.WebsiteAPI;
+import xyz.sethy.websiteapi.framework.forum.Thread;
+import xyz.sethy.websiteapi.impl.forums.CoreThread;
 
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by seth on 06/07/17.
- */
-public class LeaderboardsGet extends Page implements Route
+public class ForumsThreadDeleteGet extends Page implements Route
 {
     @Override
-    public Object handle(Request request, Response response) throws Exception
+    public Object handle(final Request request, final Response response) throws Exception
     {
         Map<String, Object> map = new HashMap<>();
         User user = null;
@@ -38,25 +36,20 @@ public class LeaderboardsGet extends Page implements Route
             }
         }
 
-        String server = request.params("server");
-        String pageStr = request.params("page");
-
-        if(!StringUtils.isNumeric(pageStr))
+        Thread currentThread = WebsiteAPI.getForumManager().findById(Integer.valueOf(request.params("thread")));
+        if (currentThread != null)
         {
-            response.redirect("/404");
-            return render(request, map, Path.Template.LEADERBOARDS);
-        }
+            if (((user != null) && (currentThread.getAuthor().getUniqueId().equals(user.getUniqueId()))))
+                map.put("author", true);
+            else
+                map.put("author", false);
 
-        Integer page = Integer.valueOf(pageStr);
-
-        switch (server.toLowerCase())
-        {
-            case "kitpvp":
-            {
-                map.put("entries_1", WebsiteAPI.getLeaderboardManager().getLeaderboardEntries("kitpvp_kills", page));
-                map.put("entries_2", WebsiteAPI.getLeaderboardManager().getLeaderboardEntries("kitpvp_deaths", page));
-            }
+            currentThread.setDeleted(true);
+            WebsiteAPI.getRedisThreadDAO().update((CoreThread) currentThread);
+            response.redirect("/forums");
+            return render(request, map, Path.Template.FORUMS_THREAD);
         }
-        return render(request, map, Path.Template.LEADERBOARDS);
+        response.redirect("/404");
+        return render(request, map, Path.Template.FORUMS_THREAD);
     }
 }

@@ -2,6 +2,7 @@ package xyz.sethy.website.pages.forums;
 
 import com.skygrind.api.API;
 import com.skygrind.api.framework.user.User;
+import com.skygrind.core.framework.user.CoreUserManager;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -26,11 +27,14 @@ public class ForumsCategoryPost extends Page implements Route
         if(request.session().attribute("currentUser") != null)
         {
             String name = request.session().attribute("currentUser");
-            user = API.getUserManager().findByName(name);
-            if(user != null)
+            for(User user1 : ((CoreUserManager)API.getUserManager()).getUserDataDriver().findAll())
             {
-                map.put("loggedIn", true);
-                map.put("loggedInAs", user);
+                if(user1.getName().equalsIgnoreCase(name))
+                {
+                    user = user1;
+                    map.put("loggedIn", true);
+                    map.put("loggedInAs", user);
+                }
             }
         }
 
@@ -56,17 +60,21 @@ public class ForumsCategoryPost extends Page implements Route
             Thread thread = new CoreThread(WebsiteAPI.getForumManager().findAllThreads().size() + 1, title, post, user.getUniqueId());
             WebsiteAPI.getForumManager().findAllThreads().add(thread);
             currentCategory.getThreads().add(thread.getId());
-            response.redirect("/forums");
+
+            WebsiteAPI.getRedisThreadDAO().insert((CoreThread) thread);
+            WebsiteAPI.getRedisCategoryDAO().insert((CoreCategory) currentCategory);
+            response.redirect("/forums/thread/" + thread.getId());
+            return render(request, map, Path.Template.FORUMS_CATEGORY);
         }
 
         String ctitle = request.queryParams("c-title");
         String cDesc = request.queryParams("c-desc");
         if ((ctitle != null) && (cDesc != null))
         {
-            Category forumCategory = new CoreCategory(WebsiteAPI.getForumManager().findAllCategories().size() + 1, null, ctitle);
+            Category forumCategory = new CoreCategory(WebsiteAPI.getForumManager().findAllCategories().size() + 1, Integer.MAX_VALUE, ctitle, cDesc);
             WebsiteAPI.getForumManager().findAllCategories().add(forumCategory);
+            WebsiteAPI.getRedisCategoryDAO().update((CoreCategory) forumCategory);
         }
-        response.redirect("/forums");
         return render(request, map, Path.Template.FORUMS_CATEGORY);
     }
 }

@@ -1,0 +1,88 @@
+#parse("/web/global/layout.vm")
+#@mainLayout()
+<form id="forumsThread" method="post">
+    #if($foundThread)
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h1>$thread.getTitle()</h1>
+                    #if($author)
+                        <div>
+                        <a type="button" href="/forums/thread/$thread.getId()/delete" class="btn">Delete</a>
+                        <a type="button" data-target="#edit-thread" class="btn">Edit</a>
+                        <a type="button" href="/forums/thread/$thread.getId()/lock" class="btn">Lock Thread</a>
+                        </div>
+                    #end
+                    <hr>
+                    <div class="modal fade" id="edit-thread" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                        <center>
+                            <div class="container">
+                                <div class="row">
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <div class="col-md-8 col-md-offset-2">
+
+                                        <h1>Edit thread</h1>
+
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" name="title-edit" placeholder="$thread.getTitle()" ></input>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <textarea rows="5" class="form-control" name="post-edit" placeholder="$thread.getBody()" ></textarea>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-primary">Edit</button>
+                                            </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </center>
+                    </div>
+                    <p><img src="https://visage.surgeplay.com/face/22/$thread.getAuthor().getUniqueId()"></img> by <a href="/user/$thread.getAuthor().getName()">$thread.getAuthor().getName()</a>
+                    </p>
+                    <p><i class="fa fa-calendar"></i> Posted at $thread.getPostedAt().toGMTString()</p>
+                    <hr>
+                    <p>$post</p>
+                    <hr />
+                    #if($thread.isLocked())
+                        <div class="well">
+                            <h4>This thread is locked, you cannot reply!</h4>
+                        </div>
+                    #else
+                        <div class="well">
+                            <h4>Leave a Comment</h4>
+                            <form role="form">
+                                <div class="form-group">
+                                    <textarea class="form-control" name="reply" rows="3"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-reply"></i> Submit</button>
+                            </form>
+                        </div>
+                        #foreach($reply in $thread.getReplies())
+                            <div class="media">
+                                <div class="media-body">
+                                    <h4 class="media-heading">$reply.getAuthor().getName() <small>$reply.getPostedAt().toGMTString()</small>
+                                    </h4>
+                                    $reply.getPost()
+                                </div>
+                            </div>
+                        #end
+                    #end
+                </div>
+            </div>
+        </div>
+    #else
+    <div class="container">
+        <h3>Not Found (Error 404)</h3>
+        <hr />
+        <p>No page with that address was found, please try again. If this page is suppose to be here, contact support @ https@sethy.xyz</p>
+    </div>
+    #end
+</form>
+#end

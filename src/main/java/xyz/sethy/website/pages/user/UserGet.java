@@ -1,4 +1,4 @@
-package xyz.sethy.website.pages.forums;
+package xyz.sethy.website.pages.user;
 
 import com.skygrind.api.API;
 import com.skygrind.api.framework.user.User;
@@ -6,19 +6,13 @@ import com.skygrind.core.framework.user.CoreUserManager;
 import spark.Request;
 import spark.Response;
 import spark.Route;
-import xyz.sethy.website.Website;
 import xyz.sethy.website.pages.Page;
 import xyz.sethy.website.util.Path;
-import xyz.sethy.websiteapi.WebsiteAPI;
-import xyz.sethy.websiteapi.framework.forum.Category;
 
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
-public class ForumsHomeGet extends Page implements Route
+public class UserGet extends Page implements Route
 {
     @Override
     public Object handle(final Request request, final Response response) throws Exception
@@ -38,19 +32,28 @@ public class ForumsHomeGet extends Page implements Route
                 }
             }
         }
+        String userSearched = request.params("name");
 
-        List<Category> categories = WebsiteAPI.getForumManager().findAllCategories().stream().filter(category -> category.getParentCategory() == Integer.MAX_VALUE).collect(Collectors.toCollection(LinkedList::new));
-
-        map.put("categories", categories);
-        
-        if(user != null)
+        boolean set = false;
+        for (User user1 : ((CoreUserManager)API.getUserManager()).getUserDataDriver().findAll())
         {
-            String group = user.getProfile("permissions").getString("group");
-            map.put("staff", Website.getInstance().getStaffGroups().contains(group));
+            if (user1 != null)
+            {
+                if (user1.getName().equalsIgnoreCase(userSearched))
+                {
+                    set = true;
+                    map.put("foundUser", true);
+                    map.put("user", user1);
+                    if(user != null && user.getUniqueId().equals(user1.getUniqueId()))
+                        map.put("theirUser", true);
+                    else
+                        map.put("theirUser", false);
+                }
+            }
         }
-        else
-            map.put("staff", false);
 
-        return render(request, map, Path.Template.FORUMS_HOME);
+        if (!set)
+            response.redirect("/404");
+        return render(request, map, Path.Template.USER);
     }
 }

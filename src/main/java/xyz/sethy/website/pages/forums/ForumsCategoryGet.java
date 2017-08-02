@@ -2,6 +2,8 @@ package xyz.sethy.website.pages.forums;
 
 import com.skygrind.api.API;
 import com.skygrind.api.framework.user.User;
+import com.skygrind.core.framework.user.CoreUserManager;
+import org.apache.commons.lang3.StringUtils;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -10,9 +12,13 @@ import xyz.sethy.website.pages.Page;
 import xyz.sethy.website.util.Path;
 import xyz.sethy.websiteapi.WebsiteAPI;
 import xyz.sethy.websiteapi.framework.forum.Category;
+import xyz.sethy.websiteapi.framework.forum.Thread;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ForumsCategoryGet extends Page implements Route
 {
@@ -24,11 +30,14 @@ public class ForumsCategoryGet extends Page implements Route
         if(request.session().attribute("currentUser") != null)
         {
             String name = request.session().attribute("currentUser");
-            user = API.getUserManager().findByName(name);
-            if(user != null)
+            for(User user1 : ((CoreUserManager)API.getUserManager()).getUserDataDriver().findAll())
             {
-                map.put("loggedIn", true);
-                map.put("loggedInAs", user);
+                if(user1.getName().equalsIgnoreCase(name))
+                {
+                    user = user1;
+                    map.put("loggedIn", true);
+                    map.put("loggedInAs", user);
+                }
             }
         }
 
@@ -40,16 +49,25 @@ public class ForumsCategoryGet extends Page implements Route
         else
             map.put("staff", false);
 
-        Category currentCategory = WebsiteAPI.getForumManager().findCategoryById(Integer.valueOf(request.params("category")));
-        if (currentCategory == null)
+        String category = request.params("category");
+        if(!StringUtils.isNumeric(category))
         {
-            map.put("foundCategory", false);
+            response.redirect("/404");
             return render(request, map, Path.Template.FORUMS_CATEGORY);
         }
 
+        Category currentCategory = WebsiteAPI.getForumManager().findCategoryById(Integer.valueOf(category));
+        if (currentCategory == null)
+        {
+            response.redirect("/404");
+            return render(request, map, Path.Template.FORUMS_CATEGORY);
+        }
+
+        map.put("currentCategory", currentCategory);
+        map.put("foundCategory", true);
         map.put("categories", WebsiteAPI.getForumManager().findCategoriesByParent(currentCategory));
-        map.put("threads", WebsiteAPI.getForumManager().findThreadsByParent(currentCategory));
-        response.redirect("/forums");
+        List<Thread> threads = WebsiteAPI.getForumManager().findThreadsByParent(currentCategory).stream().filter(thread -> !thread.isDeleted()).collect(Collectors.toList());
+        map.put("threads", threads);
         return render(request, map, Path.Template.FORUMS_CATEGORY);
     }
 }

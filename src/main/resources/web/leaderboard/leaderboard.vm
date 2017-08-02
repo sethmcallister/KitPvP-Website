@@ -16,7 +16,7 @@
                     <tbody>
                         #foreach($entry in $entries_1)
                             <th scope="row">#$entry.getPlace()</th>
-                            <td><img class="table_img" src="https://crafatar.com/avatars/" + $entry.getProfile().getUniqueId() alt=$entry.getProfile().getName()><a href="/user/" + $entry.getProfile().getName()></a></img></td>
+                            <td><img class="table_img" src="https://visage.surgeplay.com/face/22/$entry.getUser().getUniqueId()" alt=$entry.getUser().getName()>$entry.getUser().getName()<a href="/user/" + $entry.getUser().getName()></a></img></td>
                             <td>$entry.getScore()</td>
                         #end
                     </tbody>
@@ -35,7 +35,7 @@
                     <tbody>
                         #foreach($entry in $entries_2)
                             <th scope="row">#$entry.getPlace()</th>
-                            <td><img class="table_img" src="https://crafatar.com/avatars/" + $entry.getProfile().getUniqueId() alt=$entry.getProfile().getName()><a href="/user/" + $entry.getProfile().getName()></a></img></td>
+                            <td><img class="table_img" src="https://visage.surgeplay.com/face/22/$entry.getUser().getUniqueId()" alt=$entry.getUser().getName()>$entry.getUser().getName()<a href="/user/" + $entry.getUser().getName()></a></img></td>
                             <td>$entry.getScore()</td>
                         #end
                     </tbody>

@@ -49,7 +49,7 @@
                     <tbody>
                         #foreach($c in $categories)
                             <tr>
-                                <td><h4><a href="/forums/category/$c.getCategoryId()">$c.getCategoryName()</a><br><small>$c.getDescription()</small></h4></td>
+                                <td><h4><a href="/forums/category/$c.getId()">$c.getName()</a><br><small>$c.getDescription()</small></h4></td>
                                 <td class="text-center hidden-xs hidden-sm"><p>$c.getThreads().size()</p></td>
                                 <td class="text-center hidden-xs hidden-sm"><p>$c.getTotalViews()</p></td>
                             </tr>
