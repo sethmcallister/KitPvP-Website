@@ -20,6 +20,7 @@ public class Path
         public static String FORUMS_LOCK_THREAD = "/forums/thread/:thread/lock";
         public static String REGISTER = "/register/:uuid";
         public static String SETTINGS = "/settings";
+        public static String RULES = "/rules";
     }
 
     public static class Template
@@ -35,5 +36,6 @@ public class Path
         public static final String FORUMS_THREAD = "/web/forums/thread.vm";
         public static final String REGISTER = "/web/register/register.vm";
         public static final String SETTINGS = "/web/settings/settings.vm";
+        public static final String RULES = "/web/rules/rules.vm";
     }
 }

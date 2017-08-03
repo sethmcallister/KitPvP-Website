@@ -2,7 +2,7 @@
 #@mainLayout()
 <form id="storeForm" method="post">
     <div class="container">
-    
+        <iframe src="http://kitpvprip.buycraft.net/"></iframe>
     </div>
 </form>
 #end

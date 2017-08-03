@@ -1,9 +1,8 @@
-package xyz.sethy.website.pages.notfound;
+package xyz.sethy.website.pages.rules;
 
 import com.skygrind.api.API;
 import com.skygrind.api.framework.user.User;
 import com.skygrind.core.framework.user.CoreUserManager;
-import org.eclipse.jetty.http.HttpStatus;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -13,7 +12,7 @@ import xyz.sethy.website.util.Path;
 import java.util.HashMap;
 import java.util.Map;
 
-public class NotFoundGet extends Page implements Route
+public class RulesGet extends Page implements Route
 {
     @Override
     public Object handle(final Request request, final Response response) throws Exception
@@ -33,7 +32,6 @@ public class NotFoundGet extends Page implements Route
                 }
             }
         }
-        response.status(HttpStatus.NOT_FOUND_404);
-        return render(request, map, Path.Template.NOT_FOUND);
+        return render(request, map, Path.Template.RULES);
     }
 }

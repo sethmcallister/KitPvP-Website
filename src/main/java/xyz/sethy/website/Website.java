@@ -1,7 +1,9 @@
 package xyz.sethy.website;
 
 import com.skygrind.api.API;
+import com.skygrind.api.framework.user.User;
 import com.skygrind.core.framework.CoreFramework;
+import com.skygrind.core.framework.user.CoreUserManager;
 import org.eclipse.jetty.http.HttpStatus;
 import spark.Filter;
 import spark.Request;
