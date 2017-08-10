@@ -32,6 +32,7 @@ public class StoreGet extends Page implements Route
                 }
             }
         }
+        response.redirect("https://store.kitpvp.rip");
         return render(request, map, Path.Template.STORE);
     }
 }

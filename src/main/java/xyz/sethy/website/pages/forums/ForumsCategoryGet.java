@@ -67,7 +67,16 @@ public class ForumsCategoryGet extends Page implements Route
         map.put("foundCategory", true);
         map.put("categories", WebsiteAPI.getForumManager().findCategoriesByParent(currentCategory));
         List<Thread> threads = WebsiteAPI.getForumManager().findThreadsByParent(currentCategory).stream().filter(thread -> !thread.isDeleted()).collect(Collectors.toList());
-        map.put("threads", threads);
+
+        List<Thread> threadList = new ArrayList<>();
+        for(Thread thread : threads)
+        {
+            if(thread == null || thread.isDeleted())
+                continue;
+
+            threadList.add(thread);
+        }
+        map.put("threads", threadList);
         return render(request, map, Path.Template.FORUMS_CATEGORY);
     }
 }

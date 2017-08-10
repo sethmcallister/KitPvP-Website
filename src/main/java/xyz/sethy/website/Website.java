@@ -19,6 +19,7 @@ import xyz.sethy.website.pages.logout.LogoutGet;
 import xyz.sethy.website.pages.notfound.NotFoundGet;
 import xyz.sethy.website.pages.register.RegisterGet;
 import xyz.sethy.website.pages.register.RegisterPost;
+import xyz.sethy.website.pages.rules.RulesGet;
 import xyz.sethy.website.pages.settings.SettingsGet;
 import xyz.sethy.website.pages.settings.SettingsPost;
 import xyz.sethy.website.pages.store.StoreGet;
@@ -26,7 +27,6 @@ import xyz.sethy.website.pages.user.UserGet;
 import xyz.sethy.website.util.Path;
 import xyz.sethy.websiteapi.WebsiteAPI;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -51,7 +51,7 @@ public class Website
         this.staffGroups.add("MODERATOR");
 
         WebsiteAPI.setFramework(new xyz.sethy.websiteapi.impl.CoreFramework());
-        API.setFramework(new CoreFramework(true));
+        API.setFramework(new CoreFramework());
 
         spark.debug.DebugScreen.enableDebugScreen();
 
@@ -94,6 +94,9 @@ public class Website
 
         get(Path.Web.SETTINGS, new SettingsGet());
         post(Path.Web.SETTINGS, new SettingsPost());
+
+        get(Path.Web.RULES, new RulesGet());
+
         get("*", new NotFoundGet());
     }
 

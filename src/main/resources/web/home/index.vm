@@ -2,7 +2,10 @@
 #@mainLayout()
 <form id="indexForm" method="post">
     <div class="container">
-
+        <center>
+            <h1>Welcome to KitPvP</h1>
+            <h3>Join kitpvp.rip</h3>
+        </center>
     </div>
 </form>
 #end

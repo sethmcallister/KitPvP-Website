@@ -1,7 +1,166 @@
-#parse("/web/global/layout.vm")
-#@mainLayout()
+#parse("/web/global/layout.vm") #@mainLayout()
 <form id="rulesForm" method="post">
     <div class="container">
+        <h1>Rules</h1>
+        <div>
+            <hr/>
+
+            <p>These rules serve as a guideline for punishments for illegal actions, keep in mind that any staff member has the ability to soften or harden these punishments if they find it necessary. If you feel that you have been banned in-justly or would like to report somebody for breaking one of these rules.</p>
+            <hr/>
+
+            <h3>Hacked Clients</h3>
+
+            <ul>
+                <li>First offense - Permanent Ban</li>
+            </ul>
+
+            <p>Any mod that changes the way a player interacts with the server is considered a hacked client. This contains things such as force field, click aimbot, flying, etc.</p>
+
+            <hr/>
+
+            <h3>Lying to Staff Members</h3>
+
+            <ul>
+                <li>First offense - Permanent Ban Simple enough, do not lie to any staff member.</li>
+            </ul>
+
+            <hr/>
+
+            <h3>X-Ray/Radar</h3>
+
+            <ul>
+                <li>First Offense - 1 Month Ban</li>
+                <li>Second Offense - Permanent Ban</li>
+            </ul>
+
+            <h3>Any Other Unapproved Texture Packs and Mods</h3>
+
+            <ul>
+                <li>First Offense - 2 Week Ban</li>
+                <li>Second Offense - Permanent Ban Anything outside of the vanilla client used to provide an advantage to player that isn't considered a hack falls under this category. Mods that you have not been given permission to use are NOT allowed.</li>
+            </ul>
+
+            <hr/>
+
+            <h3>Auto Clickers</h3>
+
+            <ul>
+                <li>First Offense - Permanent Ban</li>
+                <li>Modifying your mouse in ANYWAY Is not allowed</li>
+            </ul>
+
+            <h3>Macroing</h3>
+
+            <ul>
+                <li>First Offense - Permanent Ban</li>
+            </ul>
+
+            <p>Auto clickers and macros for your mouse are NOT allowed neither is rebinding mouse buttons or using more than one device at a time. And Yes, it is still illegal even if you were using your mouse while your dog/hamster/grandmother etc was using a second device. Dragclicking is also not allowed, neither is any other stupid crap you guys come up with in future.</p>
+
+            <hr/>
+
+            <h3>Abuse or Exploit of a Bug or Glitch</h3>
+
+            <ul>
+                <li>First Offense - 2 Week Ban</li>
+                <li>Second Offense - Permanent Ban</li>
+            </ul>
+
+            <p>Exploiting any bug, whether Minecraft related (F3 + A) or plugin related, for the use of personal gain or causing harm to the server or its players is bannable. Maliciously using our plugins in ways that it is not meant for is considered abusing. If you aren't sure if something is allowed, ask before you do it to prevent a possible ban. If you find a bug, please report it immediately to the admins through private message.</p>
+
+            <hr/>
+
+            <h3>Block Glitching</h3>
+
+            <ul>
+                <li>First Offense - 3 day ban</li>
+                <li>Second Offense - Scaling bans</li>
+            </ul>
+
+            <p>Block Glitching involves hitting a player through a block. If you are caught doing so you will be warned to stop by a member of staff. If you continue you will be banned for 3 days. If you are caught doing it again you will not be warned and will receive a scaling ban. If a player block glitches to kill another player and we find proof of this, the offending player will be banned as per above. You will only get 1 warning</p>
+
+            <hr/>
+
+            <hr/>
+
+            <h3>Inappropriate Chat Content</h3>
+
+            <ul>
+                <li>First Offense - 5 minute mute</li>
+                <li>Second Offense - 30 minute mute</li>
+                <li>Third Offense - 1 hour mute</li>
+                <li>Fourth offense - 1 day mute</li>
+                <li>Every Offense Afterwards - Scaling Bans</li>
+            </ul>
+
+            <p>Players who we consider serial offenders (people who we find to be considerably toxic in chat) will be permanently muted</p>
+
+            <hr/>
+
+            <h3>Staff Disrespect</h3>
+
+            <p>Saying anything to a staff member which involves their personal life in anyway will get you muted/banned depending on context/how inappropriate the content is. The punishment will be decided by an admin and serial offenders may be permanently banned.</p>
+
+            <ul>
+                <li>Any Offense - Punishment decided by an admin</li>
+            </ul>
+
+            <p>This has become a big problem recently and it is not acceptable.</p>
+
+            <hr/>
+
+            <h3>Death Threats/ Suicide jokes/Telling someone to kill themselves/Scamming</h3>
+
+            <ul>
+                <li>Punishment decided by Admin</li>
+            </ul>
+
+            <p>Racism will not be tolerated, harassment of our players and staff will not be tolerated, and spamming will not be tolerated. Scamming i.e. promising any purchasable items (CS: GO items, server ranks etc.) in exchange for in game items (diamonds and whatever else it is you guys are too lazy to actually play the game and get), with the intent of not following through is NOT allowed in chat. If you are seen doing this in chat you will be muted, how long you are muted is up to the admins. Use common sense when typing in chat. If it isn't something you'd say to someone's face, then it isn't something you should say here. Releasing personal information about players includes but is not limited to facebook/instagram accounts, phone number, skype names, addresses, or pictures. This will result in a temp/permban or a blacklist depending on the situation.</p>
+
+            <hr/>
+
+            <h3>Advertising of another Server</h3>
+
+            <ul>
+                <li>First Offense - Permanent Ban</li>
+            </ul>
+
+            <p>Simple enough, don't advertise. This does not include talking about another server in conversation.</p>
+
+            <hr/>
+
+            <h3>Playing On or Using Alternate Accounts</h3>
+
+            <ul>
+                <li>First Offense - 1 Month Ban</li>
+                <li>Second Offense - Permanent Ban</li>
+            </ul>
+
+            <p>Alting on the server is not allowed</p>
+
+            <ul>
+                <li>First Offense - The alt will be banned, you will receive a warning.</li>
+                <li>Second Offense - 2 week ban</li>
+            </ul>
+
+            <p>The use of alternate accounts is not allowed on ANY of our servers. If you have any family/friends that share an IP with you, you are required to tell us so that we do not accidentally ban you.</p>
+
+            <hr/>
+
+            <h3>DDoSing/DoSing/Doxing</h3>
+
+            <ul>
+                <li>First Offense - Blacklist (permanent ban with no ability to buy an unban)</li>
+            </ul>
+
+            <p>These are considered federal crimes in most countries and will NOT be tolerated on our servers. If you have any evidence of somebody committing these acts, please show us. This includes ALL DDoS threats, joke or not.</p>
+
+            <hr/>
+
+            <h3>Inappropriate Names</h3>
+
+            <p>Inappropriate names will be perm banned until the name is changed. This any name including the words "Nigger", "Faggot", "DDOS" or anything overly sexual.</p>
+        </div>
 
     </div>
 </form>

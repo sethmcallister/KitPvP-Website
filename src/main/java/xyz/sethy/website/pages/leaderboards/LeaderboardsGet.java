@@ -10,8 +10,11 @@ import spark.Route;
 import xyz.sethy.website.pages.Page;
 import xyz.sethy.website.util.Path;
 import xyz.sethy.websiteapi.WebsiteAPI;
+import xyz.sethy.websiteapi.framework.leaderboards.LeaderboardEntry;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -53,8 +56,23 @@ public class LeaderboardsGet extends Page implements Route
         {
             case "kitpvp":
             {
-                map.put("entries_1", WebsiteAPI.getLeaderboardManager().getLeaderboardEntries("kitpvp_kills", page));
-                map.put("entries_2", WebsiteAPI.getLeaderboardManager().getLeaderboardEntries("kitpvp_deaths", page));
+                List<LeaderboardEntry> killEntries = new ArrayList<>();
+                for(LeaderboardEntry entry : WebsiteAPI.getLeaderboardManager().getLeaderboardEntries("kitpvp_kills", page))
+                {
+                    if(entry == null)
+                        continue;
+                    killEntries.add(entry);
+                }
+                map.put("entries_1", killEntries);
+
+                List<LeaderboardEntry> deathEntries = new ArrayList<>();
+                for(LeaderboardEntry entry : WebsiteAPI.getLeaderboardManager().getLeaderboardEntries("kitpvp_death", page))
+                {
+                    if(entry == null)
+                        continue;
+                    deathEntries.add(entry);
+                }
+                map.put("entries_2", deathEntries);
             }
         }
         return render(request, map, Path.Template.LEADERBOARDS);

@@ -44,7 +44,7 @@
                             </div>
                         </center>
                     </div>
-                    <p><img src="https://visage.surgeplay.com/face/22/$thread.getAuthor().getUniqueId()"></img> by <a href="/user/$thread.getAuthor().getName()">$thread.getAuthor().getName()</a>
+                    <p><img src="https://visage.surgeplay.com/face/22/$thread.getAuthor().getUniqueId()"></img><a href="/user/$thread.getAuthor().getName()">$thread.getAuthor().getName()</a>
                     </p>
                     <p><i class="fa fa-calendar"></i> Posted at $thread.getPostedAt().toGMTString()</p>
                     <hr>
